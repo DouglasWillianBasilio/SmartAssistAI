@@ -58,21 +58,6 @@ Antes de começar, certifique-se de ter o seguinte instalado:
     Abra o navegador e acesse http://localhost:5000 para interagir com o chatbot.
 
 
-## Estrutura do Projeto
-
-smart-assist-ai/
-├── app/
-│   ├── static/          # Arquivos estáticos (CSS, JS)
-│   │   ├── styles.css   # Estilos CSS
-│   │   └── script.js    # Lógica JavaScript
-│   ├── templates/       # Arquivos HTML
-│   │   └── index.html   # Página principal do chat
-│   ├── chatbot.py       # Backend Flask
-│   └── requirements.txt # Dependências do Python
-├── docker-compose.yml   # Configuração do Docker Compose
-├── Dockerfile           # Instruções para construir a imagem Docker
-├── .env                 # Variáveis de ambiente
-└── README.md            # Documentação do projeto
 
 #### Backend (Flask)
 
