@@ -1,0 +1,52 @@
+# Arquivos de ambiente
+.env
+
+# Diretórios de dependências
+__pycache__/
+venv/
+env/
+.venv/
+.env/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Diretórios de build e distribuição
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Arquivos de IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# Arquivos de log e cache
+*.log
+*.cache
+*.pot
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos do Docker
+docker-compose.override.yml
+
+# Arquivos de banco de dados (se houver)
+*.db
+*.sqlite3
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Arquivos de cache do Python
+.pytest_cache/
+.mypy_cache/
