@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartAssist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-header">
+            <h2>SmartAssist</h2>
+            <button id="reset-chat" onclick="resetChat()"><i class="fas fa-trash"></i> Resetar Chat</button>
+        </div>
+        <div id="chat-history">
+            <!-- Mensagens serão adicionadas aqui dinamicamente -->
+        </div>
+        <div id="input-container">
+            <textarea id="user-input" placeholder="Digite sua mensagem..."></textarea>
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i> Enviar</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
