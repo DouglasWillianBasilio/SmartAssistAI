@@ -46,8 +46,8 @@ Antes de começar, certifique-se de ter o seguinte instalado:
 
 2. **Configure as variáveis de ambiente:**:
 
-   1.GROQ_API_KEY=sua_chave_aqui
-   2.FLASK_SECRET_KEY=uma_chave_secreta_forte
+   * GROQ_API_KEY=sua_chave_aqui
+   * FLASK_SECRET_KEY=uma_chave_secreta_forte
 
 3. **Construa e execute os contêineres:**:
     ```bash
