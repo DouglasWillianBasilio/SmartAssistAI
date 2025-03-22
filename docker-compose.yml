@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  chatbot:
+    build: ./app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app:/app
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
