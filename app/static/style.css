@@ -1,3 +1,49 @@
+/* ===== ADIÇÕES PARA DARK MODE ===== */
+:root {
+    --primary-color: #0078d4;
+    --dark-bg: #1e1e1e;
+    --dark-chat-bg: #2c2c2c;
+    --dark-text: #eaeaea;
+    --dark-border: #444;
+    --dark-input-bg: #3a3a3a;
+}
+
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+body.dark-mode #chat-container {
+    background-color: var(--dark-chat-bg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode #chat-history {
+    background-color: var(--dark-input-bg);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .bot-message {
+    background-color: var(--dark-border);
+    color: var(--dark-text);
+}
+
+body.dark-mode #user-input {
+    background-color: var(--dark-input-bg);
+    border-color: var(--dark-border);
+    color: var(--dark-text);
+}
+
+body.dark-mode #toggle-dark i {
+    color: #ffcc00;
+}
+
+/* Posicionamento dos botões no header (adicione se não existir) */
+#header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
 /* Fonte e layout base */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

@@ -1,7 +1,26 @@
-// Alternar Dark Mode
+// ===== ADIÇÕES PARA DARK MODE =====
 function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
+    const body = document.body;
+    body.classList.toggle('dark-mode');
+    const icon = document.querySelector('#toggle-dark i');
+    
+    if (body.classList.contains('dark-mode')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+    } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+    }
+    
+    localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
 }
+
+// Carregar tema ao iniciar
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        const icon = document.querySelector('#toggle-dark i');
+        icon.classList.replace('fa-moon', 'fa-sun');
+    }
+});
 
 // Envio com tecla Enter (sem Shift)
 document.getElementById('user-input').addEventListener('keydown', function (event) {
