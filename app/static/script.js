@@ -1,65 +1,92 @@
-// Adicionar evento de teclado ao campo de entrada
-document.getElementById('user-input').addEventListener('keydown', function (event) {
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+  }
+  
+  document.getElementById('user-input').addEventListener('keydown', function (event) {
     if (event.key === 'Enter' && !event.shiftKey) {
-        event.preventDefault(); // Impede a quebra de linha padrão
-        sendMessage(); 
+      event.preventDefault();
+      sendMessage();
     }
-    
-});
-
-async function sendMessage() {
+  });
+  
+  async function sendMessage() {
     const userInput = document.getElementById('user-input');
-    const message = userInput.value.trim(); // Remove espaços em branco no início e no final
-
-    if (message === '') {
-        alert('Por favor, digite uma mensagem.');
-        return;
+    const message = userInput.value.trim();
+  
+    if (!message) {
+      alert('Por favor, digite uma mensagem.');
+      return;
     }
-
-    // Adicionar mensagem do usuário ao histórico
-    const chatHistory = document.getElementById('chat-history');
-    const userMessage = document.createElement('div');
-    userMessage.className = 'message user-message';
-    userMessage.textContent = message; // Exibe a mensagem com quebras de linha
-    chatHistory.appendChild(userMessage);
-
-    // Limpar o campo de entrada
+  
+    appendMessageToChat('user', message);
     userInput.value = '';
-
+  
     try {
-        const response = await fetch('http://localhost:5000/chat', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ message: message }),
-        });
-
-        if (!response.ok) {
-            throw new Error('Erro ao enviar a mensagem');
-        }
-
-        const data = await response.json();
-
-        // Adicionar resposta do chatbot ao histórico
-        const botMessage = document.createElement('div');
-        botMessage.className = 'message bot-message';
-
-        // Formatar a resposta do bot
-        const formattedResponse = data.response.replace(/\n/g, '<br>'); // Substituir quebras de linha por <br>
-        botMessage.innerHTML = formattedResponse;
-
-        chatHistory.appendChild(botMessage);
-
-        // Rolagem automática para a última mensagem
-        chatHistory.scrollTop = chatHistory.scrollHeight;
+      const response = await fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+  
+      if (!response.ok) throw new Error(`Erro do servidor: ${response.status}`);
+  
+      const data = await response.json();
+      const formattedResponse = data.response;
+      await typeMessage('bot', formattedResponse);
     } catch (error) {
-        console.error('Erro:', error);
-        alert('Ocorreu um erro ao enviar a mensagem. Tente novamente.');
+      console.error('Erro:', error);
+      alert('Erro ao enviar mensagem. Tente novamente.');
     }
-}
-
-function resetChat() {
+  }
+  
+  function appendMessageToChat(sender, message, isHTML = false) {
     const chatHistory = document.getElementById('chat-history');
-    chatHistory.innerHTML = ''; // Limpa o histórico de mensagens
-}
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender}-message`;
+  
+    if (isHTML) {
+      messageDiv.innerHTML = message;
+    } else {
+      messageDiv.textContent = message;
+    }
+  
+    chatHistory.appendChild(messageDiv);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+  }
+  
+  async function typeMessage(sender, fullMessage) {
+    const chatHistory = document.getElementById('chat-history');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender}-message`;
+    chatHistory.appendChild(messageDiv);
+  
+    let i = 0;
+    const delay = 15;
+    let buffer = '';
+    let tagOpen = false;
+  
+    while (i < fullMessage.length) {
+      const char = fullMessage[i];
+  
+      if (char === '<') tagOpen = true;
+      if (tagOpen) {
+        buffer += char;
+        if (char === '>') {
+          messageDiv.innerHTML += buffer;
+          buffer = '';
+          tagOpen = false;
+        }
+      } else {
+        messageDiv.innerHTML += char;
+      }
+  
+      i++;
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+  
+  function resetChat() {
+    document.getElementById('chat-history').innerHTML = '';
+  }
+  

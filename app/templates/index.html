@@ -5,19 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartAssist</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div id="chat-container">
         <div id="chat-header">
             <h2>SmartAssist</h2>
-            <button id="reset-chat" onclick="resetChat()"><i class="fas fa-trash"></i> Resetar Chat</button>
+            <div>
+                <button id="toggle-dark" onclick="toggleDarkMode()" title="Alternar Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="reset-chat" onclick="resetChat()" title="Resetar Conversa">
+                    <i class="fas fa-trash"></i> Resetar Chat
+                </button>
+            </div>
         </div>
+
         <div id="chat-history">
             <!-- Mensagens serão adicionadas aqui dinamicamente -->
         </div>
+
         <div id="input-container">
             <textarea id="user-input" placeholder="Digite sua mensagem..."></textarea>
-            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i> Enviar</button>
+            <button onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i> Enviar
+            </button>
         </div>
     </div>
 
