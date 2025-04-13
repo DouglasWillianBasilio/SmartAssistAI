@@ -3,3 +3,5 @@ groq
 langchain-community>=0.0.1
 python-dotenv
 langdetect
+flask-sqlalchemy
+flask-caching
